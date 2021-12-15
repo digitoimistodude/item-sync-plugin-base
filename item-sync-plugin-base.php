@@ -5,7 +5,7 @@
  * Plugin URI: https://dude.fi
  * Author: Digitoimisto Dude Oy
  * Author URI: https://dude.fi
- * Version: 0.1.0
+ * Version: 0.1.1
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Network: false
@@ -13,7 +13,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:01:03
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-11-09 17:37:46
+ * @Last Modified time: 2021-12-15 17:56:46
  *
  * @package item-sync-plugin-base
  */

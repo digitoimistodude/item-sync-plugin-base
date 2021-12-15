@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:22:00
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-11-09 17:37:50
+ * @Last Modified time: 2021-12-15 17:55:57
  *
  * @package item-sync-plugin-base
  */
@@ -13,6 +13,8 @@ namespace Item_Sync_Plugin_Base;
 defined( 'ABSPATH' ) || exit;
 
 function save_item( $item ) {
+  $data_hash_key = prefix_key( 'data_hash', true );
+
   if ( ! isset( $item['id'] ) ) {
     return;
   }
@@ -27,6 +29,23 @@ function save_item( $item ) {
     log( 'Item WP ID not found', 'debug' );
   }
 
+  $data_hash = md5( json_encode( $item ) );
+
+  /**
+   * If item exists already in databse, check the new data
+   * hash againts stored one to check if anything has changed.
+   * In case hashes are same, we can safely assume that data
+   * has not changed and skip the save process of this item.
+   */
+  if ( $item_post_id ) {
+    $data_hash_old = get_post_meta( $item_post_id, $data_hash_key, true );
+
+    if ( $data_hash === $data_hash_old ) {
+      log( 'Item skipped. New and old data hash matches, assuming no data changes', 'debug' );
+      return;
+    }
+  }
+
   $save = [
     'ID'            => $item_post_id,
     'post_type'     => get_cpt_slug(),
@@ -35,6 +54,7 @@ function save_item( $item ) {
     'meta_input'    => [
       prefix_key( 'sync_id', true )   => $item['id'],
       prefix_key( 'sync_time', true ) => wp_date( 'Y-m-d H:i:s' ),
+      $data_hash_key                  => $data_hash,
     ],
   ];
 
