@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:08:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-11-09 17:37:49
+ * @Last Modified time: 2021-12-15 18:13:07
  *
  * @package item-sync-plugin-base
  */
@@ -38,11 +38,5 @@ function call_api( $params = [], $args = [] ) {
     return false;
   }
 
-  $xml = simplexml_load_string( $body );
-  if ( ! $xml ) {
-    log( 'API returned invalid xml', 'error' );
-    return false;
-  }
-
-  return json_decode( json_encode( $xml ), true );
+  return json_decode( $body, true );
 } // end call_api
