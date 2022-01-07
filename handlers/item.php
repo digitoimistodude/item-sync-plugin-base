@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:22:00
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-12-15 17:55:57
+ * @Last Modified time: 2022-01-07 20:27:22
  *
  * @package item-sync-plugin-base
  */
@@ -58,8 +58,18 @@ function save_item( $item ) {
     ],
   ];
 
+  /**
+   * Consider disabling Simple History logging during the item save if
+   * the sync runs often and there are hundereds of items being synced.
+   * Simple History logging might end up increasing your database size.
+   */
+  // add_filter( 'simple_history/log/do_log', '__return_false' );
+
   // Save post
   $insert = wp_insert_post( $save );
+
+  // add_filter( 'simple_history/log/do_log', '__return_true' );
+
   if ( $insert ) {
     $item['wp_post_id'] = $insert; // Add WP ID to item details
 
