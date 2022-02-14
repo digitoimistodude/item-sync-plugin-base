@@ -12,10 +12,6 @@ namespace Item_Sync_Plugin_Base;
 
 defined( 'ABSPATH' ) || exit;
 
-function get_cpt_slug() {
-  return 'product';
-} // end get_cpt_slug
-
 function prefix_key( $key, $hidden = false ) {
   $prefix = get_prefix();
   return $hidden ? "_{$prefix}_{$key}" : "{$prefix}_{$key}";
