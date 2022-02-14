@@ -30,6 +30,10 @@ function get_prefix() {
   return 'item_sync_plugin_base';
 } // end get_prefix
 
+function get_cpt_slug() {
+  return 'person';
+} // end get_cpt_slug
+
 /**
  * Pure function files.
  */
