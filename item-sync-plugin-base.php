@@ -62,4 +62,4 @@ register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deschedule_cron_events' 
  * Admin side functionalities.
  */
 include plugin_dir_path( __FILE__ ) . '/admin/notices.php';
-add_action( 'current_screen', __NAMESPACE__ . '\maybe_show_item_update_notice' );
+add_action( 'current_screen', __NAMESPACE__ . '\maybe_show_update_notice' );
