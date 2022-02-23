@@ -2,8 +2,8 @@
 /**
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:06:10
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-11-09 17:37:48
+ * @Last Modified by:   Elias Kautto
+ * @Last Modified time: 2022-02-23 14:46:50
  *
  * @package item-sync-plugin-base
  */
@@ -22,7 +22,7 @@ function deschedule_cron_events() {
   wp_clear_scheduled_hook( prefix_key( 'cron' ) );
 } // end deschedule_cron_events
 
-function sync() {
+function sync( $force = false ) {
   update_option( prefix_key( 'sync_start' ), wp_date( 'Y-m-d H:i:s' ) );
 
   $response = call_api();
@@ -31,7 +31,7 @@ function sync() {
   }
 
   foreach ( $response['items'] as $item ) {
-    save_item( $item );
+    save_item( $item, $force );
   }
 
   update_option( prefix_key( 'sync_end' ), wp_date( 'Y-m-d H:i:s' ) );

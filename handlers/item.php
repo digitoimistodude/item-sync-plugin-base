@@ -2,8 +2,8 @@
 /**
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:22:00
- * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-01-07 20:27:22
+ * @Last Modified by:   Elias Kautto
+ * @Last Modified time: 2022-02-23 14:47:13
  *
  * @package item-sync-plugin-base
  */
@@ -12,7 +12,7 @@ namespace Item_Sync_Plugin_Base;
 
 defined( 'ABSPATH' ) || exit;
 
-function save_item( $item ) {
+function save_item( $item, $force ) {
   $data_hash_key = prefix_key( 'data_hash', true );
 
   if ( ! isset( $item['id'] ) ) {
@@ -37,7 +37,7 @@ function save_item( $item ) {
    * In case hashes are same, we can safely assume that data
    * has not changed and skip the save process of this item.
    */
-  if ( $item_post_id ) {
+  if ( $item_post_id && ! $force ) {
     $data_hash_old = get_post_meta( $item_post_id, $data_hash_key, true );
 
     if ( $data_hash === $data_hash_old ) {
