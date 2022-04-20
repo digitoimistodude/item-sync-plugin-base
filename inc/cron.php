@@ -23,6 +23,7 @@ function deschedule_cron_events() {
 } // end deschedule_cron_events
 
 function sync( $force = false ) {
+  update_option( prefix_key( 'sync_end' ), null ); // set end to null for extra cleanup prevention if problems
   update_option( prefix_key( 'sync_start' ), wp_date( 'Y-m-d H:i:s' ) );
 
   $response = call_api();
