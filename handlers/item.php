@@ -41,6 +41,7 @@ function save_item( $item, $force ) {
     $data_hash_old = get_post_meta( $item_post_id, $data_hash_key, true );
 
     if ( $data_hash === $data_hash_old ) {
+      update_post_meta( $item_post_id, prefix_key( 'sync_time', true ), wp_date( 'Y-m-d H:i:s' ) );
       log( 'Item skipped. New and old data hash matches, assuming no data changes', 'debug' );
       return;
     }
