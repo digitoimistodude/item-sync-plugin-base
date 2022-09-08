@@ -12,7 +12,7 @@ namespace Item_Sync_Plugin_Base;
 
 defined( 'ABSPATH' ) || exit;
 
-function log( $message, $level = 'info', $wp_error = null ) {
+function log( $message, $level = 'debug', $wp_error = null ) {
   // WP CLI
   if ( defined( 'WP_CLI' ) && WP_CLI ) {
     $wp_cli_level = $level;
