@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:08:32
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-12-15 18:13:07
+ * @Last Modified time: 2022-11-14 15:43:32
  *
  * @package item-sync-plugin-base
  */
@@ -38,5 +38,7 @@ function call_api( $params = [], $args = [] ) {
     return false;
   }
 
-  return json_decode( $body, true );
+  $data = json_decode( $body, true );
+
+  return $data;
 } // end call_api

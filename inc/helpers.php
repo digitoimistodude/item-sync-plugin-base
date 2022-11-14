@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:04:33
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-11-09 17:45:00
+ * @Last Modified time: 2022-11-14 15:48:41
  *
  * @package item-sync-plugin-base
  */
@@ -37,3 +37,25 @@ function get_item_post_id_by_api_id( $item_id ) {
 
   return empty( $return ) ? false : $return[0];
 } // end get_item_post_id_by_api_id
+
+function dev_debug_run() {
+  if ( 'development' !== wp_get_environment_type() ) {
+    return;
+  }
+
+  if ( ! is_user_logged_in() ) {
+    return;
+  }
+
+  if ( ! isset( $_GET['run'] ) ) {
+    return;
+  }
+
+  if ( get_prefix() !== sanitize_title( $_GET['run'] ) ) {
+    return;
+  }
+
+  $force = isset( $_GET['force'] );
+
+  sync( $force, true );
+} // end dev_debug_run

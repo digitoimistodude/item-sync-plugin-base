@@ -2,8 +2,8 @@
 /**
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:22:00
- * @Last Modified by:   Elias Kautto
- * @Last Modified time: 2022-02-23 14:47:13
+ * @Last Modified by:   Timi Wahalahti
+ * @Last Modified time: 2022-11-14 15:43:26
  *
  * @package item-sync-plugin-base
  */
@@ -20,6 +20,7 @@ function save_item( $item, $force ) {
   }
 
   log( "Updating item API ID: {$item['id']}", 'debug' );
+  log( $item, 'debug' );
 
   // Try to get WP post ID matching this item
   $item_post_id = get_item_post_id_by_api_id( $item['id'] );

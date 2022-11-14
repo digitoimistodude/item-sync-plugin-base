@@ -5,7 +5,7 @@
  * Plugin URI: https://dude.fi
  * Author: Digitoimisto Dude Oy
  * Author URI: https://dude.fi
- * Version: 0.1.1
+ * Version: 0.2.0
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Network: false
@@ -13,7 +13,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:01:03
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2021-12-15 17:56:46
+ * @Last Modified time: 2022-11-14 15:48:23
  *
  * @package item-sync-plugin-base
  */
@@ -23,7 +23,7 @@ namespace Item_Sync_Plugin_Base;
 defined( 'ABSPATH' ) || exit;
 
 function get_plugin_version() {
-  return 010;
+  return 020;
 } // end get_plugin_version
 
 function get_prefix() {
@@ -31,7 +31,7 @@ function get_prefix() {
 } // end get_prefix
 
 function get_cpt_slug() {
-  return 'person';
+  return 'cpt';
 } // end get_cpt_slug
 
 /**
@@ -53,10 +53,11 @@ include plugin_dir_path( __FILE__ ) . '/handlers/cleanup.php';
  */
 include plugin_dir_path( __FILE__ ) . '/inc/cron.php';
 register_activation_hook( __FILE__,   __NAMESPACE__ . '\schedule_cron_events' ); // Add cron event for sync on activation
+register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deschedule_cron_events' );
+add_action( 'init',                   __NAMESPACE__ . '\dev_debug_run' ); // Allow running the sync from browser on development
 add_action( 'admin_init',             __NAMESPACE__ . '\schedule_cron_events' ); // Ensure cron event is in place
 add_action( prefix_key( 'cron' ),     __NAMESPACE__ . '\sync' ); // Cron sync event
 add_action( prefix_key( 'cleanup' ),  __NAMESPACE__ . '\cleanup' ); // Cron cleanup event
-register_deactivation_hook( __FILE__, __NAMESPACE__ . '\deschedule_cron_events' );
 
 /**
  * Admin side functionalities.
