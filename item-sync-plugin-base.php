@@ -5,7 +5,7 @@
  * Plugin URI: https://dude.fi
  * Author: Digitoimisto Dude Oy
  * Author URI: https://dude.fi
- * Version: 0.3.0
+ * Version: 0.4.0
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Network: false
@@ -13,7 +13,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:01:03
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2023-01-25 14:11:42
+ * @Last Modified time: 2023-01-25 14:30:42
  *
  * @package item-sync-plugin-base
  */
@@ -23,7 +23,7 @@ namespace Item_Sync_Plugin_Base;
 defined( 'ABSPATH' ) || exit;
 
 function get_plugin_version() {
-  return 030;
+  return 040;
 } // end get_plugin_version
 
 function get_prefix() {
@@ -46,6 +46,7 @@ include plugin_dir_path( __FILE__ ) . '/inc/wp-cli.php';
  * Handlers for singular item sync and clenup.
  */
 include plugin_dir_path( __FILE__ ) . '/handlers/item.php';
+include plugin_dir_path( __FILE__ ) . '/handlers/item-terms.php';
 include plugin_dir_path( __FILE__ ) . '/handlers/cleanup.php';
 
 /**

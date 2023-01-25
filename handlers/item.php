@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:22:00
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2022-11-14 15:43:26
+ * @Last Modified time: 2023-01-25 14:26:06
  *
  * @package item-sync-plugin-base
  */
@@ -84,4 +84,6 @@ function save_item( $item, $force ) {
     log( 'Item save failed', 'error' );
     return;
   }
+
+  // save_item_terms( $item );
 } // end save_item
