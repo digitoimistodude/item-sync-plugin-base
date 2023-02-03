@@ -3,7 +3,7 @@
  * @Author: Timi Wahalahti
  * @Date:   2021-11-09 16:22:00
  * @Last Modified by:   Timi Wahalahti
- * @Last Modified time: 2023-01-25 14:26:06
+ * @Last Modified time: 2023-02-03 11:00:05
  *
  * @package item-sync-plugin-base
  */
@@ -54,10 +54,11 @@ function save_item( $item, $force ) {
     'post_status'   => 'publish',
     'post_title'    => $item['name'],
     'meta_input'    => [
-      prefix_key( 'sync_id', true )        => $item['id'],
-      prefix_key( 'sync_time', true )      => wp_date( 'Y-m-d H:i:s' ),
-      prefix_key( 'data_hash_base', true ) => $item,
-      $data_hash_key                      => $data_hash,
+      prefix_key( 'sync_id', true )         => $item['id'],
+      prefix_key( 'sync_time', true )       => wp_date( 'Y-m-d H:i:s' ),
+      prefix_key( 'updated_time', true )    => wp_date( 'Y-m-d H:i:s' ),
+      prefix_key( 'data_hash_base', true )  => $item,
+      $data_hash_key                        => $data_hash,
     ],
   ];
 
