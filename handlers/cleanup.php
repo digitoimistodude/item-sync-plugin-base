@@ -56,6 +56,12 @@ function cleanup_items() {
   log( 'Cleaning up ' . count( $items ) . ' items', 'debug' );
 
   foreach ( $items as $item_id => $name ) {
+    $sync_id = get_post_meta( $item_id, prefix_key( 'sync_id', true ), true );
+    if ( empty( $sync_id ) ) {
+      log( "Skipping deletion of {$name} because sync id not exists, assuming manual addition" );
+      continue;
+    }
+    
     log( "Deleting item: {$name} - last updated " . get_post_meta( $item_id, prefix_key( 'sync_time', true ), true ), 'debug' );
 
     // trash instead of removal, trash is cleaned up automatically anyways
